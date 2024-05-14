@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Patients List</title>
+</head>
+<style>
+    .c {
+        display:flex;
+        justify-content:center;
+    }
+    body {
+      font-family: sans-serif;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 50;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    button[type="submit"] {
+      background-color: #f44336; /* Red */
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #da291c; /* Red hover */
+    }
+
+</style>
+<body>
+<h1>Patients</h1>
+<div class="c">
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Problem</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="patient : ${patients}">
+            <td th:text="${patient.name}"></td>
+            <td th:text="${patient.gender}"></td>
+            <td th:text="${patient.problem}"></td>
+            <td>
+                <form th:action="@{/deletePatient/{id}(id=${patient.patientId})}" th:method="DELETE">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
